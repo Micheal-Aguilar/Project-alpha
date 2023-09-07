@@ -1,39 +1,32 @@
-<!DOCTYPE html>
-<html>
+{% extends 'base.html' %}
 
-<head>
-  <title>List of Projects</title>
-</head>
-
-<body>
-  <main>
-    <div>
-      <h1>My Projects</h1>
-      <p><a href="{% url 'create_project' %}">Create a new project</a></p>
-      {% if projects %}
-      <table>
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Number of tasks</th>
-          </tr>
-        </thead>
-        <tbody>
-          {% for project in projects %}
-          <tr>
-            <td><a href="{% url 'show_project' project.id %}">{{ project.name }}</a></td>
-            <td>{{ project.tasks.all|length }}</td>
-            <td>{{ project.name }}</td>
-            <td>0</td>
-          </tr>
-          {% endfor %}
-        </tbody>
-      </table>
-      {% else %}
-      <p>You are not assigned to any projects</p>
-      {% endif %}
-    </div>
-  </main>
-</body>
-
-</html>
+{% block content %}
+<main>
+  <div>
+    <h1>My Projects</h1>
+    <p><a href="{% url 'create_project' %}">Create a new project</a></p>
+    {% if projects %}
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Number of tasks</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for project in projects %}
+        <tr>
+          <td><a href="{% url 'show_project' project.id %}">{{ project.name }}</a></td>
+          <td>{{ project.tasks.all|length }}</td>
+          <td>{{ project.name }}</td>
+          <td>0</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% else %}
+    <p>You are not assigned to any projects</p>
+    {% endif %}
+  </div>
+</main>
+{% endblock content %}
